@@ -65,7 +65,6 @@ def update_ratings_from_existing_place_ids():
     conn = get_connection()
     cur = conn.cursor()
     
-    # Find all restaurants that have place_ids but need rating updates
     cur.execute("""
         SELECT restaurant_id, place_id 
         FROM google_ratings 
@@ -87,7 +86,6 @@ def update_ratings_from_existing_place_ids():
         
         print(f"[{idx}/{total}] {name}...", flush=True)
         
-        # Get fresh details using existing place_id (FREE!)
         place_data = get_place_details_by_id(place_id)
         
         if place_data and place_data.get('rating') is not None:
